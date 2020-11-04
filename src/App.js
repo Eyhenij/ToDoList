@@ -1,19 +1,14 @@
 import React from "react";
-import './App.module.css';
-import ListItem from "./components/toDoItem/toDoItem.jsx";
+import './App.css';
+import ToDoItem from './state';
+
 
 const App = () => {
     return (
-        <div className='App'>
-            <header className='App - header'>
-                <div>
-                    <ListItem />
-                    <ListItem />
-                    <ListItem />
-                    <ListItem />
-                    <ListItem />
-                </div>
-            </header>
+        <div className='list'>
+            <div className='list__item'>
+                {ToDoItem}
+            </div>
         </div>
     );
 }
