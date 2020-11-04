@@ -1,32 +1,26 @@
 import React from "react";
 import './App.css';
-import arrListData from './state';
-import ListItem from './components/ListItem/ListItem.jsx'
+import TaskList from './components/TaskList.jsx'
 
 
-const App = () => {
+const App = (props) => {
 
-    const handleChange = (id) => {
-        console.log('Значение изменилось', id);
+    let newTaskElement = React.createRef();
+    const addTask = () => {
+        let taskText = newTaskElement.current.value;
+        props.addTask(taskText);
     }
-
-
-    const ToDoItem = arrListData.map(i => {
-        return (
-            <ListItem
-                key={i.id}
-                description={i.description}
-                completed={i.completed}
-                handleChange={() => { handleChange(i.id) }}
-            />
-        )
-    }
-    );
 
     return (
         <div className='list'>
             <div className='list__item'>
-                {ToDoItem}
+                <TaskList state={props.state} />
+            </div>
+            <div>
+                <textarea ref={newTaskElement}></textarea>
+            </div>
+            <div>
+                <button onClick={addTask}>Add task</button>
             </div>
         </div>
     );
