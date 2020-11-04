@@ -1,0 +1,13 @@
+.list__item {
+}
+
+.item__description {
+    color: #000000;
+    background-color: olivedrab;
+}
+.item__description:hover {
+    background-color: gold;
+}
+
+.item__input {
+}
