@@ -1,35 +1,44 @@
-import React from "react";
+import { React, Component } from "react";
 import './App.css';
 import arrListData from './state';
 import ListItem from './components/ListItem/ListItem.jsx'
 
 
-const App = () => {
-
-    const handleChange = (id) => {
-        console.log('Значение изменилось', id);
+class App extends Component {
+    constructor() {
+        super();
+        this.state = { ToDoItem: arrListData }
     }
 
+    handleChange = (id) => {
+        const index = this.state.ToDoItem.map(i => i.id).indexOf(id);
+        this.setState(state => {
+            let { ToDoItem } = state;
+            ToDoItem[index].completed = true;
+            return ToDoItem;
+        })
+    }
 
-    const ToDoItem = arrListData.map(i => {
+    render() {
+        const { ToDoItem } = this.state;
+        const activeTasks = ToDoItem.filter(task => task.completed === false);
+        const completedTasks = ToDoItem.filter(task => task.completed === true);
+        const finalTasks = [...activeTasks, ...completedTasks].map(i => {
+            return (
+                <ListItem
+                    key={i.id}
+                    description={i.description}
+                    completed={i.completed}
+                    handleChange={() => { this.handleChange(i.id) }}
+                />
+            )
+        });
         return (
-            <ListItem
-                key={i.id}
-                description={i.description}
-                completed={i.completed}
-                handleChange={() => { handleChange(i.id) }}
-            />
-        )
-    }
-    );
-
-    return (
-        <div className='list'>
             <div className='list__item'>
-                {ToDoItem}
+                {finalTasks}
             </div>
-        </div>
-    );
+        );
+    }
 }
 
 export default App;

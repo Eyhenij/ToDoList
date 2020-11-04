@@ -2,12 +2,15 @@ import React from 'react';
 import s from './ListItem.module.css';
 
 const ListItem = (props) => {
+    const resolvedClass = {
+        textDecoration: 'line-through'
+    }
     return (
         <div className={s.list__item}>
-            <div className={s.item__description}>
+            <div style={props.completed == true ? resolvedClass : {}}>
                 {props.description}
             </div>
-            <div className={s.item__input} >
+            <div className={s.item__input}>
                 <input
                     type="checkbox"
                     defaultChecked={props.completed}
