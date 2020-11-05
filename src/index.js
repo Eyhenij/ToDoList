@@ -1,20 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+// import App from './App';
 import reportWebVitals from './reportWebVitals';
 import state from './state.js';
-import { addTask } from './state';
+// import { addTask } from './state';
+import reRenderEntireTree from './render.js';
 
-
-ReactDOM.render(
-  <React.StrictMode>
-    <App
-      state={state}
-      addTask={addTask}
-    />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+reRenderEntireTree(state);
 
 reportWebVitals();

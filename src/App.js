@@ -7,8 +7,12 @@ const App = (props) => {
 
     let newTaskElement = React.createRef();
     const addTask = () => {
+        props.addTask();
+    }
+
+    let onTaskChange = () => {
         let taskText = newTaskElement.current.value;
-        props.addTask(taskText);
+        props.updateNewTaskText(taskText);
     }
 
     return (
@@ -17,7 +21,11 @@ const App = (props) => {
                 <TaskList state={props.state} />
             </div>
             <div>
-                <textarea ref={newTaskElement}></textarea>
+                <textarea
+                    ref={newTaskElement}
+                    value={props.state.newTaskText}
+                    onChange={onTaskChange}
+                />
             </div>
             <div>
                 <button onClick={addTask}>Add task</button>

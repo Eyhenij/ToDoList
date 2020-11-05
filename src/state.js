@@ -1,3 +1,6 @@
+import reRenderEntireTree from './render.js';
+
+
 let state = {
 
    arrListData: [
@@ -6,17 +9,25 @@ let state = {
       { id: 2, description: 'закончить тестовое задание', completed: false },
       { id: 3, description: 'Подготовить презентацию', completed: false },
       { id: 4, description: 'Посмотреть 100 лекций по react', completed: false }
-   ]
+   ],
+
+   newTaskText: 'Please, write your new task'
 
 }
 export default state;
 
-export let addTask = (taskText) => {
+export let addTask = () => {
    let newTask = {
       id: 5,
-      description: taskText,
+      description: state.newTaskText,
       completed: false
    };
-
    state.arrListData.push(newTask);
+   state.newTaskText = '';
+   reRenderEntireTree(state);
+}
+
+export let updateNewTaskText = (updateTask) => {
+   state.newTaskText = updateTask;
+   reRenderEntireTree(state);
 }
