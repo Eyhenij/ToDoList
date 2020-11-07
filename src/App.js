@@ -7,12 +7,12 @@ const App = (props) => {
 
     let newTaskElement = React.createRef();
     const addTask = () => {
-        props.addTask();
+        props.dispatch({ type: 'ADD-TASK' });
     }
 
     let onTaskChange = () => {
         let taskText = newTaskElement.current.value;
-        props.updateNewTaskText(taskText);
+        props.dispatch({ type: 'UPDATE-NEW-TASK-TEXT', updateTask: taskText });
     }
 
     return (

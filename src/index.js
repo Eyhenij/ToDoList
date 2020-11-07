@@ -11,8 +11,7 @@ let reRenderEntireTree = (state) => {
       <React.StrictMode>
          <App
             state={state}
-            addTask={store.addTask.bind(store)}
-            updateNewTaskText={store.updateNewTaskText.bind(store)}
+            dispatch={store.dispatch.bind(store)}
          />
       </React.StrictMode>,
       document.getElementById('root')

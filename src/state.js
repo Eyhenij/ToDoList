@@ -14,15 +14,19 @@ let store = {
 
    },
 
+   _callSubscriber() {
+      console.log('state изменился');
+   },
+
    getState() {
       return (this._state);
    },
 
-   callSubscriber() {
-      console.log('state изменился');
+   subscribe(observer) {
+      this._callSubscriber = observer;
    },
 
-   addTask() {
+   _addTask() {
       let newTask = {
          id: 5,
          description: this._state.newTaskText,
@@ -30,18 +34,26 @@ let store = {
       };
       this._state.arrListData.push(newTask);
       this._state.newTaskText = '';
-      this.callSubscriber(this._state);
+      this._callSubscriber(this._state);
    },
 
-   updateNewTaskText(updateTask) {
+   _updateNewTaskText(updateTask) {
       this._state.newTaskText = updateTask;
-      this.callSubscriber(this._state);
+      this._callSubscriber(this._state);
    },
 
-   subscribe(observer) {
-      this.callSubscriber = observer;
-   }
 
+   dispatch(action) {
+      if (action.type === 'ADD-TASK') {
+         return (this._addTask())
+      } else if (action.type === 'UPDATE-NEW-TASK-TEXT') {
+         // return (this._updateNewTaskText(action.updateTask))
+
+         this._state.newTaskText = action.updateTask;
+         this._callSubscriber(this._state);
+
+      }
+   }
 }
 
 export default store;
