@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 // import reportWebVitals from './reportWebVitals';
-import state from './state.js';
-import { updateNewTaskText, addTask, subscribe } from './state';
+import store from './state.js';
 
 
 let reRenderEntireTree = (state) => {
@@ -12,14 +11,14 @@ let reRenderEntireTree = (state) => {
       <React.StrictMode>
          <App
             state={state}
-            addTask={addTask}
-            updateNewTaskText={updateNewTaskText}
+            addTask={store.addTask.bind(store)}
+            updateNewTaskText={store.updateNewTaskText.bind(store)}
          />
       </React.StrictMode>,
       document.getElementById('root')
    );
 }
 
-reRenderEntireTree(state);
-subscribe(reRenderEntireTree);
+reRenderEntireTree(store.getState());
+store.subscribe(reRenderEntireTree);
 // reportWebVitals();
