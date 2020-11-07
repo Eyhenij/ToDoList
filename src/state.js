@@ -1,5 +1,6 @@
-import reRenderEntireTree from './render.js';
-
+let reRenderEntireTree = () => {
+   console.log('state изменился');
+}
 
 let state = {
 
@@ -14,9 +15,8 @@ let state = {
    newTaskText: 'Please, write your new task'
 
 }
-export default state;
 
-export let addTask = () => {
+export const addTask = () => {
    let newTask = {
       id: 5,
       description: state.newTaskText,
@@ -27,7 +27,13 @@ export let addTask = () => {
    reRenderEntireTree(state);
 }
 
-export let updateNewTaskText = (updateTask) => {
+export const updateNewTaskText = (updateTask) => {
    state.newTaskText = updateTask;
    reRenderEntireTree(state);
 }
+
+export const subscribe = (observer) => {
+   reRenderEntireTree = observer;
+}
+
+export default state;
