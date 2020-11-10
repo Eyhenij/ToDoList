@@ -1,3 +1,5 @@
+import tasksReduser from './redux/tasksReducer'
+
 let store = {
 
    _state: {
@@ -10,7 +12,7 @@ let store = {
          { id: 4, description: 'Посмотреть 100 лекций по react', completed: false }
       ],
 
-      newTaskText: 'Please, write your new task'
+      newTaskText: ''
 
    },
 
@@ -26,33 +28,9 @@ let store = {
       this._callSubscriber = observer;
    },
 
-   _addTask() {
-      let newTask = {
-         id: 5,
-         description: this._state.newTaskText,
-         completed: false
-      };
-      this._state.arrListData.push(newTask);
-      this._state.newTaskText = '';
-      this._callSubscriber(this._state);
-   },
-
-   _updateNewTaskText(updateTask) {
-      this._state.newTaskText = updateTask;
-      this._callSubscriber(this._state);
-   },
-
-
    dispatch(action) {
-      if (action.type === 'ADD-TASK') {
-         return (this._addTask())
-      } else if (action.type === 'UPDATE-NEW-TASK-TEXT') {
-         // return (this._updateNewTaskText(action.updateTask))
-
-         this._state.newTaskText = action.updateTask;
-         this._callSubscriber(this._state);
-
-      }
+      this._state = tasksReduser(this._state, action)
+      this._callSubscriber(this._state);
    }
 }
 

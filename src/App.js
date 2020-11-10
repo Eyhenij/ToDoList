@@ -1,18 +1,19 @@
 import React from "react";
 import './App.css';
 import TaskList from './components/TaskList.jsx'
+import { addTaskActionCreator, updateNewTaskActionCreator } from './redux/tasksReducer';
 
 
 const App = (props) => {
 
     let newTaskElement = React.createRef();
     const addTask = () => {
-        props.dispatch({ type: 'ADD-TASK' });
+        props.dispatch(addTaskActionCreator());
     }
 
-    let onTaskChange = () => {
-        let taskText = newTaskElement.current.value;
-        props.dispatch({ type: 'UPDATE-NEW-TASK-TEXT', updateTask: taskText });
+    let onTaskChange = (event) => {
+        let taskText = event.target.value;
+        props.dispatch(updateNewTaskActionCreator(taskText));
     }
 
     return (
@@ -22,8 +23,8 @@ const App = (props) => {
             </div>
             <div>
                 <textarea
-                    ref={newTaskElement}
                     value={props.state.newTaskText}
+                    placeholder='please, enter your message'
                     onChange={onTaskChange}
                 />
             </div>
