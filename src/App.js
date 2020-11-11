@@ -6,7 +6,6 @@ import { addTaskActionCreator, updateNewTaskActionCreator } from './redux/tasksR
 
 const App = (props) => {
 
-    let newTaskElement = React.createRef();
     const addTask = () => {
         props.dispatch(addTaskActionCreator());
     }
@@ -19,11 +18,11 @@ const App = (props) => {
     return (
         <div className='list'>
             <div className='list__item'>
-                <TaskList state={props.state} />
+                <TaskList listData={props.state.listData} />
             </div>
             <div>
                 <textarea
-                    value={props.state.newTaskText}
+                    value={props.state.listData.newTaskText}
                     placeholder='please, enter your message'
                     onChange={onTaskChange}
                 />

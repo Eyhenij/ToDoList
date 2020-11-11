@@ -1,7 +1,18 @@
 const ADD_TASK = 'ADD-TASK';
 const UPDATE_NEW_TASK_TEXT = 'UPDATE-NEW-TASK-TEXT';
 
-const tasksReducer = (state, action) => {
+let initialState = {
+   arrListData: [
+      { id: 0, description: 'Сходить в магазин', completed: false },
+      { id: 1, description: 'Помыть кота', completed: false },
+      { id: 2, description: 'закончить тестовое задание', completed: false },
+      { id: 3, description: 'Подготовить презентацию', completed: false },
+      { id: 4, description: 'Посмотреть 100 лекций по react', completed: false }
+   ],
+   newTaskText: ''
+};
+
+const tasksReducer = (state = initialState, action) => {
 
    switch (action.type) {
       case ADD_TASK:
