@@ -1,5 +1,5 @@
 const ADD_TASK = 'ADD-TASK';
-const UPDATE_NEW_TASK_TEXT = 'UPDATE-NEW-TASK-TEXT';
+const UPDATE_NEW_TASK = 'UPDATE-NEW-TASK';
 
 let initialState = {
    arrListData: [
@@ -15,34 +15,27 @@ let initialState = {
 const tasksReducer = (state = initialState, action) => {
 
    switch (action.type) {
-      case ADD_TASK:
+      case ADD_TASK: {
          let newTask = {
-            id: 5,
+            id: state.arrListData.length,
             description: state.newTaskText,
             completed: false
          };
-         state.arrListData.push(newTask);
-         state.newTaskText = '';
-         return state;
-      case UPDATE_NEW_TASK_TEXT:
-         state.newTaskText = action.updateTask;
-         return state;
+         return {
+            ...state,
+            arrListData: [...state.arrListData, newTask],
+            newTaskText: ''
+         };
+      }
+      case UPDATE_NEW_TASK: {
+         return { ...state, newTaskText: action.updateTask }
+      }
       default:
          return state;
    }
 }
 
-export const addTaskActionCreator = () => {
-   return {
-      type: ADD_TASK
-   }
-}
-
-export const updateNewTaskActionCreator = (taskText) => {
-   return {
-      type: UPDATE_NEW_TASK_TEXT,
-      updateTask: taskText
-   }
-}
+export const addTask = () => ({type: ADD_TASK});
+export const updateNewTask = (updateTask) => ({type: UPDATE_NEW_TASK, updateTask})
 
 export default tasksReducer;

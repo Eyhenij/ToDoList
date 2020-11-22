@@ -1,33 +1,31 @@
 import React from "react";
 import './App.css';
 import TaskList from './components/TaskList.jsx'
-import { addTaskActionCreator, updateNewTaskActionCreator } from './redux/tasksReducer';
+import { addTask, updateNewTask } from './redux/tasksReducer';
 
 
 const App = (props) => {
 
-    const addTask = () => {
-        props.dispatch(addTaskActionCreator());
+    const onAddTask = () => {
+        props.dispatch(addTask());
     }
-
-    const onTaskChange = (event) => {
-        let taskText = event.target.value;
-        props.dispatch(updateNewTaskActionCreator(taskText));
+    const onTaskChange = (e) => {
+        props.dispatch(updateNewTask(e.target.value));
     }
 
     return <div className='list'>
         <div className='list__item'>
-            <TaskList listData={props.state.listData}/>
+            <TaskList arrListData={props.listData.arrListData}/>
         </div>
         <div>
             <textarea
-                value={props.state.listData.newTaskText}
+                value={props.listData.newTaskText}
                 placeholder='please, enter your message'
                 onChange={onTaskChange}
             />
         </div>
         <div>
-            <button onClick={addTask}>Add task</button>
+            <button onClick={onAddTask}>Add task</button>
         </div>
     </div>
 }

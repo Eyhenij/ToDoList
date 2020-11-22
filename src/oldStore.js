@@ -1,6 +1,6 @@
-import tasksReduser from './redux/tasksReducer'
+import tasksReducer from './redux/tasksReducer'
 
-let store = {
+let oldStore = {
 
    _state: {
       arrListData: [
@@ -26,9 +26,9 @@ let store = {
    },
 
    dispatch(action) {
-      this._state = tasksReduser(this._state, action)
+      this._state = tasksReducer(this._state, action)
       this._callSubscriber(this._state);
    }
 }
 
-export default store;
+export default oldStore;
