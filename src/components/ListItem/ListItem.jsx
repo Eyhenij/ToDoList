@@ -11,7 +11,7 @@ const ListItem = (props) => {
                 <input
                     type="checkbox"
                     defaultChecked={props.completed}
-                    onChange={props.handleChange}
+                    // onChange={props.handleChange}
                 />
             </div>
         </div>

@@ -10,28 +10,26 @@ const App = (props) => {
         props.dispatch(addTaskActionCreator());
     }
 
-    let onTaskChange = (event) => {
+    const onTaskChange = (event) => {
         let taskText = event.target.value;
         props.dispatch(updateNewTaskActionCreator(taskText));
     }
 
-    return (
-        <div className='list'>
-            <div className='list__item'>
-                <TaskList listData={props.state.listData} />
-            </div>
-            <div>
-                <textarea
-                    value={props.state.listData.newTaskText}
-                    placeholder='please, enter your message'
-                    onChange={onTaskChange}
-                />
-            </div>
-            <div>
-                <button onClick={addTask}>Add task</button>
-            </div>
+    return <div className='list'>
+        <div className='list__item'>
+            <TaskList listData={props.state.listData}/>
         </div>
-    );
+        <div>
+            <textarea
+                value={props.state.listData.newTaskText}
+                placeholder='please, enter your message'
+                onChange={onTaskChange}
+            />
+        </div>
+        <div>
+            <button onClick={addTask}>Add task</button>
+        </div>
+    </div>
 }
 
 export default App;
